@@ -14,22 +14,22 @@ public class MakeMoveUseCase implements MakeMoveInputBoundary {
     @Override
     public void makeMove(int row, int col) {
         /*
+        TODO
         Ssomeone's been rearranging stuff. Try putting these fragments together:
         (row, col)
         board.makeMove
         if (   ) {
          */
-        if (board.makeMove(row, col)) { // Try to make the move at (row, col)
-            char winner = board.checkWin();
-            if (winner != '-') {
-                outputBoundary.presentWinner(winner);
-            } else if (board.isFull()) {
-                outputBoundary.presentWinner('D'); // Draw
-            } else {
-                board.switchPlayer();
-            }
+        char winner = board.checkWin();
+        if (winner != '-') {
+            outputBoundary.presentWinner(winner);
+        } else if (board.isFull()) {
+            outputBoundary.presentWinner('D'); // Draw
         } else {
-            outputBoundary.presentError("Invalid move. Try again.");
+            board.switchPlayer();
         }
+    } else {
+        outputBoundary.presentError("Invalid move. Try again.");
     }
+}
 }
