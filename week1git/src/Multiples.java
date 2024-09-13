@@ -4,7 +4,8 @@ public class Multiples {
     public static int calculateMultiples(int limit, int multiple1, int multiple2) {
         int count = 0;
 
-        for (int i = 1; i <= limit; i++) {
+        // Loop through numbers LESS than the limit (i.e., < limit, not <= limit)
+        for (int i = 1; i < limit; i++) {
             if (i % multiple1 == 0 || i % multiple2 == 0) {
                 count++;  // Increment the count if it's a multiple of multiple1 or multiple2
             }
@@ -43,4 +44,3 @@ public class Multiples {
         }
     }
 }
-
