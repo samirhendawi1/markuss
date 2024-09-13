@@ -1,4 +1,4 @@
-package entity;
+package week1tictactoe.week1tictactoe_starter_files_hendawis.entity;
 
 public class TicTacToeBoard {
     private final char[][] board;

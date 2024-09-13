@@ -1,4 +1,4 @@
-import entity.TicTacToeBoard;
+package entity;
 import usecase.MakeMoveUseCase;
 import adapter.TicTacToePresenter;
 import adapter.TicTacToeController;
