@@ -9,9 +9,6 @@ public class TicTacToeBoard {
         currentPlayer = 'X';
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                /*
-                Assign '-' to the current row and column in board.
-                 */
                 board[row][col] = '-';  // Initialize all positions to '-'
             }
         }
@@ -26,18 +23,17 @@ public class TicTacToeBoard {
     }
 
     public boolean makeMove(int row, int col) {
-        /*
-        This is from a long 1-line Boolean expression from inside the if. You'll need three pieces.
-        Here are two:
-        row >= 0 && col >= 0 &&
-        row < 3 && col < 3 &&
-        You'll also need a clause to check whether board[row][col] is equal to '-'.
-         */
-        if (row >= 0 && col >= 0 && row < 3 && col < 3 && board[row][col] == '-') {
+        if (isValidMove(row, col)) {
             board[row][col] = currentPlayer;
             return true;
         }
         return false;
+    }
+
+    // Add the isValidMove method here to resolve the error
+    public boolean isValidMove(int row, int col) {
+        // Check if the move is within bounds and if the position is empty ('-')
+        return row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == '-';
     }
 
     public char checkWin() {
@@ -50,27 +46,21 @@ public class TicTacToeBoard {
                 return board[0][i];
             }
         }
-        /*
-        Check the main diagonal for a win. Take a look at the next if statement for inspiration, which also checks a diagonal.
-         */
+
         if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != '-') {
-            return board[0][0];  // Check main diagonal for a win
+            return board[0][0];
         }
         if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != '-') {
-            return board[0][2];  // Check anti-diagonal for a win
+            return board[0][2];
         }
         return '-';
     }
 
     public boolean isFull() {
         for (int row = 0; row < 3; row++) {
-            /*
-            The for loop looks so lonely with empty parentheses. What could
-            go in there?
-             */
-            for (int col = 0; col < 3; col++) {  // Iterate through each column
+            for (int col = 0; col < 3; col++) {
                 if (board[row][col] == '-') {
-                    return false;  // If any cell is empty, the board is not full
+                    return false;
                 }
             }
         }
