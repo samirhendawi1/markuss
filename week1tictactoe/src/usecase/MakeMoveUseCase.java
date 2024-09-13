@@ -13,23 +13,25 @@ public class MakeMoveUseCase implements MakeMoveInputBoundary {
 
     @Override
     public void makeMove(int row, int col) {
-        /*
-        TODO
-        Ssomeone's been rearranging stuff. Try putting these fragments together:
-        (row, col)
-        board.makeMove
-        if (   ) {
-         */
-        char winner = board.checkWin();
-        if (winner != '-') {
-            outputBoundary.presentWinner(winner);
-        } else if (board.isFull()) {
-            outputBoundary.presentWinner('D'); // Draw
+        // Check if the move is valid first (i.e., the cell is empty)
+        if (board.isValidMove(row, col)) {
+            // Make the move on the board
+            board.makeMove(row, col);
+
+            // Check if there is a winner after this move
+            char winner = board.checkWin();
+            if (winner != '-') {
+                outputBoundary.presentWinner(winner);
+            } else if (board.isFull()) {
+                // If the board is full and no winner, it's a draw
+                outputBoundary.presentWinner('D'); // Draw
+            } else {
+                // Switch player after a valid move
+                board.switchPlayer();
+            }
         } else {
-            board.switchPlayer();
+            // If the move is invalid, present an error message
+            outputBoundary.presentError("Invalid move. Try again.");
         }
-    } else {
-        outputBoundary.presentError("Invalid move. Try again.");
     }
-}
 }
