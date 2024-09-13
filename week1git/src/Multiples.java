@@ -19,16 +19,6 @@ public class Multiples {
         return multiples(n, a, b);
     }
 
-    // Overloaded main method for unit testing that accepts integer arguments
-    public static void main(int n, int a, int b) {
-        // Call the multiples method and store the result
-        int result = multiples(n, a, b);
-
-        // Print the result
-        System.out.println("The sum of multiples of " + a + " and " + b + " below " + n + " is: " + result);
-    }
-
-    // Original main method to handle command-line arguments (String[])
     public static void main(String[] args) {
         // Parse command line arguments for n, a, and b
         if (args.length < 3) {
@@ -54,4 +44,3 @@ public class Multiples {
         System.out.println("The sum of multiples of " + a + " and " + b + " below " + n + " is: " + result);
     }
 }
-
