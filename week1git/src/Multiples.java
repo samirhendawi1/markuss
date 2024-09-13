@@ -1,46 +1,34 @@
 public class Multiples {
-    // Method to calculate sum of multiples of 'a' and 'b' below 'n'
-    public static int multiples(int n, int a, int b) {
-        int sum = 0;
 
-        // Iterate over all numbers below n
-        for (int i = 1; i < n; i++) {
-            // Check if the number is divisible by either a or b
-            if (i % a == 0 || i % b == 0) {
-                sum += i;
+    public static void main(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Please provide three arguments");
+            return;
+        }
+
+        int limit = Integer.parseInt(args[0]);
+        int firstMultiple = Integer.parseInt(args[1]);
+        int secondMultiple = Integer.parseInt(args[2]);
+
+        printMultiples(limit, firstMultiple, secondMultiple);
+    }
+
+    // New method to handle int arguments directly
+    public static String printMultiples(int limit, int firstMultiple, int secondMultiple) {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 1; i <= limit; i++) {
+            if (i % firstMultiple == 0 || i % secondMultiple == 0) {
+                result.append(i).append(", ");
             }
         }
 
-        return sum; // Return the calculated sum
-    }
-
-    // New method for easier testing that accepts direct integer inputs
-    public static int calculateMultiples(int n, int a, int b) {
-        return multiples(n, a, b);
-    }
-
-    public static void main(String[] args) {
-        // Parse command line arguments for n, a, and b
-        if (args.length < 3) {
-            System.out.println("Please provide three positive integers: n, a, b");
-            return;
+        // Remove the last comma and space
+        if (result.length() > 0) {
+            result.setLength(result.length() - 2);
         }
 
-        // Convert arguments from strings to integers
-        int n = Integer.parseInt(args[0]);
-        int a = Integer.parseInt(args[1]);
-        int b = Integer.parseInt(args[2]);
-
-        // Handle cases where a == b
-        if (a == b) {
-            System.out.println("a and b cannot be the same. Please provide different values.");
-            return;
-        }
-
-        // Call the multiples method and store the result
-        int result = multiples(n, a, b);
-
-        // Print the result
-        System.out.println("The sum of multiples of " + a + " and " + b + " below " + n + " is: " + result);
+        // For testing purposes, return the result
+        return result.toString();
     }
 }
