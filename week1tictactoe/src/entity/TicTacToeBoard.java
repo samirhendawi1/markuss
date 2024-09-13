@@ -1,91 +1,84 @@
 package entity;
 
 public class TicTacToeBoard {
-    private final char[][] board;
+    private char[][] board;
     private char currentPlayer;
 
+    // Constructor to initialize the board
     public TicTacToeBoard() {
         board = new char[3][3];
-        currentPlayer = 'X';
+        currentPlayer = 'X'; // Set initial player to 'X'
+        initializeBoard();
+    }
+
+    // Initialize the board with empty cells
+    private void initializeBoard() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                /*
-                TODO 1 line
-                Assign '-' to the current row and column in board.
-                 */
-
+                board[row][col] = '-';  // Use '-' for empty cells
             }
         }
     }
 
-    public char getCurrentPlayer() {
-        return currentPlayer;
+    // Method to print the current board state
+    public void printBoard() {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                System.out.print(board[row][col] + " ");
+            }
+            System.out.println();
+        }
     }
 
+    // Method to make a move at the given row and column
+    public boolean makeMove(int row, int col) {
+        // Check if the move is valid (i.e., cell is empty)
+        if (row < 0 || col < 0 || row >= 3 || col >= 3) {
+            return false; // Invalid move if out of bounds
+        }
+
+        if (board[row][col] == '-') {
+            board[row][col] = currentPlayer;
+            return true; // Move made successfully
+        } else {
+            return false; // Cell is already occupied
+        }
+    }
+
+    // Method to switch players
     public void switchPlayer() {
         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
     }
 
-    public boolean makeMove(int row, int col) {
-        /*
-        TODO 1 line
-        Who doesn't love a good puzzle?
-
-        This is from a long 1-line Boolean expression from inside the if. You'll need three pieces.
-        Here are two:
-
-        row >= 0 && col >= 0 &&
-        row < 3 && col < 3 &&
-
-        You'll also need a clause to check whether board[row][col] is equal to '-'.
-         */
-        if (    ) {
-            board[row][col] = currentPlayer;
-            return true;
-        }
-        return false;
-    }
-
+    // Method to check if the current player has won
     public char checkWin() {
-        // Check rows, columns, and diagonals for a win
+        // Check rows, columns, and diagonals
         for (int i = 0; i < 3; i++) {
-            if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != '-') {
-                return board[i][0];
+            if (board[i][0] == currentPlayer && board[i][1] == currentPlayer && board[i][2] == currentPlayer) {
+                return currentPlayer; // Row win
             }
-            if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != '-') {
-                return board[0][i];
+            if (board[0][i] == currentPlayer && board[1][i] == currentPlayer && board[2][i] == currentPlayer) {
+                return currentPlayer; // Column win
             }
         }
-        /*
-        TODO 1 line
-        Check the main diagonal for a win. Take a look at the next if statement for inspiration, which also checks a diagonal.
-         */
-        if (    ) {
-            return board[0][0];
+        if (board[0][0] == currentPlayer && board[1][1] == currentPlayer && board[2][2] == currentPlayer) {
+            return currentPlayer; // Diagonal win
         }
-        if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != '-') {
-            return board[0][2];
+        if (board[0][2] == currentPlayer && board[1][1] == currentPlayer && board[2][0] == currentPlayer) {
+            return currentPlayer; // Diagonal win
         }
-        return '-';
+        return '-'; // No winner yet
     }
 
+    // Check if the board is full (i.e., no more valid moves)
     public boolean isFull() {
         for (int row = 0; row < 3; row++) {
-            /*
-            TODO 1 line
-            The for loop looks so lonely with empty parentheses. WHat could
-            go in there?
-             */
-            for (   ) {
+            for (int col = 0; col < 3; col++) {
                 if (board[row][col] == '-') {
-                    return false;
+                    return false; // There are still empty spaces
                 }
             }
         }
-        return true;
-    }
-
-    public char[][] getBoard() {
-        return board;
+        return true; // Board is full
     }
 }
