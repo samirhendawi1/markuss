@@ -1,6 +1,6 @@
 public class Multiples {
 
-    // Existing helper method that handles the logic for multiples.
+    // Helper method that calculates multiples and returns a String
     public static String calculateMultiples(int limit, int multiple1, int multiple2) {
         StringBuilder result = new StringBuilder();
         for (int i = 1; i <= limit; i++) {
@@ -8,32 +8,30 @@ public class Multiples {
                 result.append(i).append(" ");
             }
         }
-        return result.toString().trim();
+        return result.toString().trim();  // return the result instead of printing
     }
 
-    // Overloaded main method that accepts int arguments as per the test cases
-    public static void main(int limit, int multiple1, int multiple2) {
-        // Call the helper method and print the result
-        String result = calculateMultiples(limit, multiple1, multiple2);
-        System.out.println(result);
+    // Overloaded main method that returns a String instead of void
+    public static String main(int limit, int multiple1, int multiple2) {
+        // Return the result from the helper method
+        return calculateMultiples(limit, multiple1, multiple2);
     }
 
-    // Original main method that accepts String[] as required by the JVM
+    // Original main method with String[] for command-line usage
     public static void main(String[] args) {
         if (args.length < 3) {
             System.out.println("Please provide three integers: limit, multiple1, and multiple2");
             return;
         }
 
-        // Parse the input arguments as integers
+        // Parse input arguments and call calculateMultiples
         try {
             int limit = Integer.parseInt(args[0]);
             int multiple1 = Integer.parseInt(args[1]);
             int multiple2 = Integer.parseInt(args[2]);
 
-            // Call the helper method and output the result
-            String result = calculateMultiples(limit, multiple1, multiple2);
-            System.out.println(result);
+            // Print the result from the helper method
+            System.out.println(calculateMultiples(limit, multiple1, multiple2));
         } catch (NumberFormatException e) {
             System.out.println("Invalid input. Please ensure all arguments are integers.");
         }
