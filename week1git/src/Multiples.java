@@ -14,6 +14,11 @@ public class Multiples {
         return sum; // Return the calculated sum
     }
 
+    // New method for easier testing that accepts direct integer inputs
+    public static int calculateMultiples(int n, int a, int b) {
+        return multiples(n, a, b);
+    }
+
     public static void main(String[] args) {
         // Parse command line arguments for n, a, and b
         if (args.length < 3) {
