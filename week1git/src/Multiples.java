@@ -1,31 +1,25 @@
 public class Multiples {
 
-    // Helper method that calculates multiples and returns a String
-    public static String calculateMultiples(int limit, int multiple1, int multiple2) {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;  // A flag to avoid adding an extra space
+    // Helper method that calculates the number of multiples and returns an int
+    public static int calculateMultiples(int limit, int multiple1, int multiple2) {
+        int count = 0;
 
-        // Loop should stop BEFORE reaching the limit
-        for (int i = 1; i < limit; i++) {  // Notice i < limit instead of i <= limit
+        for (int i = 1; i <= limit; i++) {
             if (i % multiple1 == 0 || i % multiple2 == 0) {
-                if (!first) {
-                    result.append(" ");  // Add space before numbers after the first
-                }
-                result.append(i);  // Append the number
-                first = false;  // Update the flag after appending the first number
+                count++;  // Increment the count if it's a multiple of multiple1 or multiple2
             }
         }
 
-        return result.toString();  // Return the final string without trailing spaces
+        return count;  // Return the count of multiples
     }
 
-    // Overloaded main method that returns a String instead of void
-    public static String main(int limit, int multiple1, int multiple2) {
+    // Overloaded main method that returns an int (used by tests)
+    public static int main(int limit, int multiple1, int multiple2) {
         return calculateMultiples(limit, multiple1, multiple2);
     }
 
     // Overloaded main method with no arguments for default test case
-    public static String main() {
+    public static int main() {
         return calculateMultiples(1000, 3, 5);
     }
 
@@ -42,8 +36,8 @@ public class Multiples {
             int multiple1 = Integer.parseInt(args[1]);
             int multiple2 = Integer.parseInt(args[2]);
 
-            // Print the result from the helper method
-            System.out.println(calculateMultiples(limit, multiple1, multiple2));
+            // Print the count of multiples
+            System.out.println("Count of multiples: " + calculateMultiples(limit, multiple1, multiple2));
         } catch (NumberFormatException e) {
             System.out.println("Invalid input. Please ensure all arguments are integers.");
         }
