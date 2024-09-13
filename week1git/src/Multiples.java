@@ -1,46 +1,41 @@
 public class Multiples {
-    // Method to calculate sum of multiples of 'a' and 'b' below 'n'
-    public static int multiples(int n, int a, int b) {
-        int sum = 0;
 
-        // Iterate over all numbers below n
-        for (int i = 1; i < n; i++) {
-            // Check if the number is divisible by either a or b
-            if (i % a == 0 || i % b == 0) {
-                sum += i;
+    // Existing helper method that handles the logic for multiples.
+    public static String calculateMultiples(int limit, int multiple1, int multiple2) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i <= limit; i++) {
+            if (i % multiple1 == 0 || i % multiple2 == 0) {
+                result.append(i).append(" ");
             }
         }
-
-        return sum; // Return the calculated sum
+        return result.toString().trim();
     }
 
-    // New method for easier testing that accepts direct integer inputs
-    public static int calculateMultiples(int n, int a, int b) {
-        return multiples(n, a, b);
+    // Overloaded main method that accepts int arguments as per the test cases
+    public static void main(int limit, int multiple1, int multiple2) {
+        // Call the helper method and print the result
+        String result = calculateMultiples(limit, multiple1, multiple2);
+        System.out.println(result);
     }
 
+    // Original main method that accepts String[] as required by the JVM
     public static void main(String[] args) {
-        // Parse command line arguments for n, a, and b
         if (args.length < 3) {
-            System.out.println("Please provide three positive integers: n, a, b");
+            System.out.println("Please provide three integers: limit, multiple1, and multiple2");
             return;
         }
 
-        // Convert arguments from strings to integers
-        int n = Integer.parseInt(args[0]);
-        int a = Integer.parseInt(args[1]);
-        int b = Integer.parseInt(args[2]);
+        // Parse the input arguments as integers
+        try {
+            int limit = Integer.parseInt(args[0]);
+            int multiple1 = Integer.parseInt(args[1]);
+            int multiple2 = Integer.parseInt(args[2]);
 
-        // Handle cases where a == b
-        if (a == b) {
-            System.out.println("a and b cannot be the same. Please provide different values.");
-            return;
+            // Call the helper method and output the result
+            String result = calculateMultiples(limit, multiple1, multiple2);
+            System.out.println(result);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please ensure all arguments are integers.");
         }
-
-        // Call the multiples method and store the result
-        int result = multiples(n, a, b);
-
-        // Print the result
-        System.out.println("The sum of multiples of " + a + " and " + b + " below " + n + " is: " + result);
     }
 }
