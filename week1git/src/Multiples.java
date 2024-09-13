@@ -1,5 +1,3 @@
-package week1git.src;
-
 public class Multiples {
     // Method to calculate sum of multiples of 'a' and 'b' below 'n'
     public static int multiples(int n, int a, int b) {
