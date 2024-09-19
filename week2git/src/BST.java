@@ -119,14 +119,12 @@ public class BST {
     // find the height of this BST
     public int height() {
         if (this.isEmpty()) {
-            System.out.println("Tree is empty, height is -1");
             return -1;  // Convention: height of an empty tree is -1
         } else {
+            // Assuming `left` and `right` are either null or point to BST instances
             int leftHeight = (this.left != null) ? this.left.height() : -1;
             int rightHeight = (this.right != null) ? this.right.height() : -1;
-            int currentHeight = Math.max(leftHeight, rightHeight) + 1;
-            System.out.println("Node " + this.root + " height is " + currentHeight);
-            return currentHeight;
+            return Math.max(leftHeight, rightHeight) + 1;
         }
     }
     // count the number of times item appears in the BST
