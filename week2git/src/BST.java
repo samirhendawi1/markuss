@@ -53,12 +53,11 @@ public class BST {
             this.root = item;
             this.left = new BST(null);
             this.right = new BST(null);
-        } else if (item.compareTo(this.root) < 0) {
-            this.left.insert(item);  // Insert into left subtree
-        } else if (item.compareTo(this.root) > 0) {
-            this.right.insert(item); // Insert into right subtree
+        } else if (item < this.root) {
+            this.left.insert(item);
+        } else {
+            this.right.insert(item);
         }
-        // If item == this.root, do nothing as it's a duplicate
     }
 
     // Delete an item from the BST
@@ -123,20 +122,25 @@ public class BST {
     public int count(Integer item) {
         if (this.isEmpty()) {
             return 0;
-        } else if (this.root > item) {
-            return this.left.count(item);
-        } else if (this.root == item) {
-            return 1 + this.left.count(item) + this.right.count(item);
-        } else {
-            return this.right.count(item);
         }
+
+        int count = 0;
+
+        // If the current root is equal to the item, increment the count
+        if (this.root.equals(item)) {
+            count = 1;
+        }
+
+        // Recursively count occurrences in the left and right subtrees
+        return count + this.left.count(item) + this.right.count(item);
     }
+
     // gets the length of the BST
     public int getLength() {
         if (this.isEmpty()) {
-            return 0;  // An empty tree has length 0
+            return 0;
         } else {
-            return 1 + this.left.getLength() + this.right.getLength();  // Current node + left subtree + right subtree
+            return 1 + this.left.getLength() + this.right.getLength();
         }
     }
 
