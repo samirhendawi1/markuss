@@ -119,11 +119,10 @@ public class BST {
     // find the height of this BST
     public int height() {
         if (this.isEmpty()) {
-            return -1;  // Convention: height of an empty tree is -1
+            return 0;  // Expected convention: height of an empty tree is 0
         } else {
-            // Assuming `left` and `right` are either null or point to BST instances
-            int leftHeight = (this.left != null) ? this.left.height() : -1;
-            int rightHeight = (this.right != null) ? this.right.height() : -1;
+            int leftHeight = (this.left != null) ? this.left.height() : 0;  // Empty subtree has height 0
+            int rightHeight = (this.right != null) ? this.right.height() : 0;
             return Math.max(leftHeight, rightHeight) + 1;
         }
     }
