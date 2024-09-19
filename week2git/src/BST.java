@@ -26,15 +26,11 @@ public class BST {
     public BST() {
         this(null);
     }
-
-
-    // TODO Task: Implement the BST methods.
-
+    // check if the BST is empty
     public boolean isEmpty() {
-        // TODO implement me!
-        return false;
+        return this.root == null;
     }
-
+    // check if this integer is in the BST
     public boolean contains(Integer item) {
         // provided code; do not change
         if (this.isEmpty()) {
@@ -51,40 +47,97 @@ public class BST {
         return this.right.contains(item);
 
     }
-
-
+    // insert an item into the BST
     public void insert(Integer item) {
-        // TODO implement me!
+        if (this.isEmpty()) {
+            this.root = item;
+            this.left = new BST(null);
+            this.right = new BST(null);
+        } else if (item.compareTo(this.root) < 0) {
+            this.left.insert(item);  // Insert into left subtree
+        } else if (item.compareTo(this.root) > 0) {
+            this.right.insert(item); // Insert into right subtree
+        }
+        // If item == this.root, do nothing as it's a duplicate
     }
 
-
-    public void delete(Integer item) {
-        // TODO implement me!
+    // Delete an item from the BST
+    public void delete(int item) {
+        if (this.isEmpty()) {
+            return; // Tree is empty, nothing to delete
+        }
+        // If the item is less than root, delete from the left subtree
+        if (item < this.root) {
+            this.left.delete(item);
+        }
+        // If the item is greater than root, delete from the right subtree
+        else if (item > this.root) {
+            this.right.delete(item);
+        }
+        // If item is equal to the root, handle deletion
+        else {
+            this.deleteRoot();
+        }
     }
-
+    // delete the root of the BST
     private void deleteRoot() {
-        // TODO implement me!
+        if (this.left.isEmpty() && this.right.isEmpty()) {
+            // Case 1: Node is a leaf node
+            this.root = null;
+        } else if (this.left.isEmpty()) {
+            // Case 2: Only right child
+            this.root = this.right.root;
+            this.left = this.right.left;
+            this.right = this.right.right;
+        } else if (this.right.isEmpty()) {
+            // Case 3: Only left child
+            this.root = this.left.root;
+            this.right = this.left.right;
+            this.left = this.left.left;
+        } else {
+            // Case 4: Two children, replace root with max of left subtree
+            this.root = this.left.extractMax();
+        }
     }
 
-
+    // extract the maximum value in this BST
     private Integer extractMax() {
-        // TODO implement me!
-        return this.root; // dummy code; replace with correct code when you implement this.
+        if (this.right.isEmpty()) {
+            Integer max = this.root;
+            this.root = this.left.root;
+            this.right = this.left.right;
+            this.left = this.left.left;
+            return max;
+        }
+        return this.right.extractMax();
     }
-
+    // find the height of this BST
     public int height() {
-        // TODO implement me!
-        return 0; // dummy code; replace with correct code when you implement this.
+        if (this.isEmpty()) {
+            return 0;
+        } else {
+            return 1 + Math.max(this.left.height(), this.right.height());
+        }
     }
-
+    // count the number of times item appears in the BST
     public int count(Integer item) {
-        // TODO implement me!
-        return 0; // dummy code; replace with correct code when you implement this.
+        if (this.isEmpty()) {
+            return 0;
+        } else if (this.root > item) {
+            return this.left.count(item);
+        } else if (this.root == item) {
+            return 1 + this.left.count(item) + this.right.count(item);
+        } else {
+            return this.right.count(item);
+        }
     }
-
+    // gets the length of the BST
     public int getLength() {
-        // TODO implement me!
-        return 0; // dummy code; replace with correct code when you implement this.
+        if (this.isEmpty()) {
+            return 0;  // An empty tree has length 0
+        } else {
+            return 1 + this.left.getLength() + this.right.getLength();  // Current node + left subtree + right subtree
+        }
     }
 
     public static void main(String[] args) {
@@ -101,3 +154,4 @@ public class BST {
     }
 
 }
+
