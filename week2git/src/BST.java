@@ -51,11 +51,17 @@ public class BST {
     public void insert(Integer item) {
         if (this.isEmpty()) {
             this.root = item;
-            this.left = new BST(null);
-            this.right = new BST(null);
+            this.left = new BST();  // Ensure subtrees are initialized
+            this.right = new BST(); // Ensure subtrees are initialized
         } else if (item < this.root) {
+            if (this.left == null) {  // Safety check (shouldn't be necessary with correct initialization)
+                this.left = new BST();
+            }
             this.left.insert(item);
         } else {
+            if (this.right == null) {  // Safety check (shouldn't be necessary with correct initialization)
+                this.right = new BST();
+            }
             this.right.insert(item);
         }
     }
@@ -113,11 +119,14 @@ public class BST {
     // find the height of this BST
     public int height() {
         if (this.isEmpty()) {
-            return 0;
+            return -1;  // Convention: height of an empty tree is -1
         } else {
-            return 1 + Math.max(this.left.height(), this.right.height());
+            int leftHeight = (this.left != null) ? this.left.height() : -1;
+            int rightHeight = (this.right != null) ? this.right.height() : -1;
+            return Math.max(leftHeight, rightHeight) + 1;
         }
     }
+
     // count the number of times item appears in the BST
     public int count(Integer item) {
         if (this.isEmpty()) {
