@@ -10,11 +10,6 @@ public class Main {
     public static void main(String[] args) {
 
         // this corresponds to the main block from the provided python code.
-
-        // TODO make sure that this code can run without error after completing
-        //      the code in BSTMultiSet.java and BST.java.
-        //      The MarkUs self tests run this file as part of testing your code.
-
         List<MultiSet> multisets = new ArrayList<>();
         multisets.add(new BSTMultiSet());
 
